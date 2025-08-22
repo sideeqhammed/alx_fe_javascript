@@ -49,11 +49,16 @@ const displayQuote = document.getElementById('quoteDisplay');
 const button = document.getElementById('newQuote');
 const newQuoteText = document.getElementById('newQuoteText');
 const newQuoteCategory = document.getElementById('newQuoteCategory');
+const addNewQuote = document.getElementById('addNewQuote')
 
 
 const showRandomQuote = () => {
   const rand = Math.floor(Math.random() * quotes.length);
   displayQuote.innerHTML = quotes[rand].text;
+}
+
+const createAddQuoteForm = () => {
+  
 }
 
 const addQuote = () => {

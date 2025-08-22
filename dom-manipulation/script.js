@@ -46,10 +46,9 @@ const quotes = [
 ];
 
 const displayQuote = document.getElementById('quoteDisplay');
-const button = document.getElementById('newQuote');
-const newQuoteText = document.getElementById('newQuoteText');
-const newQuoteCategory = document.getElementById('newQuoteCategory');
+const button1 = document.getElementById('newQuote');
 const addNewQuote = document.getElementById('addNewQuote')
+const body = document.querySelector('body')
 
 
 const showRandomQuote = () => {
@@ -57,11 +56,9 @@ const showRandomQuote = () => {
   displayQuote.innerHTML = quotes[rand].text;
 }
 
-const createAddQuoteForm = () => {
-  
-}
-
 const addQuote = () => {
+  const newQuoteText = document.getElementById('newQuoteText');
+  const newQuoteCategory = document.getElementById('newQuoteCategory');
   if (newQuoteText.value && newQuoteCategory.value) {
     const newQuote = {
       text: `${newQuoteText.value}`,
@@ -76,8 +73,34 @@ const addQuote = () => {
   }
 }
 
+const createAddQuoteForm = () => {
+  const div = document.createElement('div');
+  const input1 = document.createElement('input');
+  input1.id="newQuoteText"; input1.type="text"; input1.placeholder="Enter a new quote";
+  const input2 = document.createElement('input');
+  input2.id="newQuoteCategory"; input2.type="text"; input2.placeholder="Enter quote category";
+  const button = document.createElement('button');
+  button.onclick=function() {
+    addQuote()
+  }; button.innerText = "Add Quote"
+
+  div.appendChild(input1);
+  div.appendChild(input2);
+  div.appendChild(button);
+  body.appendChild(div)
+
+
+
+  // <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+  //   <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+  //   <button onclick="addQuote()">Add Quote</button>
+}
+createAddQuoteForm();
+
+
+
 console.log(quotes);
 
-button.addEventListener('click', showRandomQuote);
+button1.addEventListener('click', showRandomQuote);
 
 

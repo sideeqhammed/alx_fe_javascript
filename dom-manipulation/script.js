@@ -48,11 +48,11 @@ const saveQuotes = () => {
   localStorage.setItem('quotesArr', JSON.stringify(quotes))
 }
 
-
 if (localStorage.getItem('quotesArr')) {
   quotesJson = localStorage.getItem('quotesArr');
   quotes = JSON.parse(quotesJson)
 }
+
 
 const displayQuote = document.getElementById('quoteDisplay');
 const button1 = document.getElementById('newQuote');
@@ -60,6 +60,7 @@ const addNewQuote = document.getElementById('addNewQuote');
 const body = document.querySelector('body');
 const exportQuotes = document.getElementById('exportQuotes');
 const importQuotes = document.getElementById('importFile')
+const selectedCateory = document.getElementById('categoryFilter')
 
 
 const showRandomQuote = () => {
@@ -83,6 +84,7 @@ const addQuote = () => {
   } else {
     alert('Incomplete information');
   }
+  populateCategories();
 }
 
 
@@ -101,11 +103,6 @@ const createAddQuoteForm = () => {
   div.appendChild(input2);
   div.appendChild(button);
   body.appendChild(div)
-
-
-  // <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-  //   <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-  //   <button onclick="addQuote()">Add Quote</button>
 }
 
 const exportToJsonFile = () => {
@@ -129,7 +126,51 @@ const importFromJsonFile = (event) => {
     alert('Quotes imported successfully!');
   }
   fileReader.readAsText(event.target.files[0]);
+
+  populateCategories();
 }
+
+function populateCategories() {
+  allCategories = quotes.map(quote => quote.category)
+
+  const uniqueCategories = new Set(allCategories);
+  console.log(uniqueCategories)
+  uniqueCategories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.innerText = category;
+    selectedCateory.appendChild(option)
+  })
+}
+populateCategories();
+
+let filter = selectedCateory.value;
+if (localStorage.getItem('filter')) {
+  selectedCateory.value = localStorage.getItem('filter')
+  filterQuotes();
+  console.log(filter, 'asdfg')
+}
+function filterQuotes() {
+  filter = selectedCateory.value;
+  let filteredQuotes = [];
+  if (filter === "all") {
+    filteredQuotes = quotes
+  } else {
+    quotes.forEach(quote => {
+      if (quote.category === filter) {
+        filteredQuotes.push(quote)
+      }
+    })
+  }
+  quotes = filteredQuotes;
+
+  localStorage.setItem('filter', filter)
+  console.log(quotes);
+}
+
+
+
+
 
 addNewQuote.addEventListener('click', createAddQuoteForm, {once: true})
 
@@ -145,5 +186,7 @@ importQuotes.addEventListener('change', (event) => {
     importFromJsonFile;
   }
 })
+
+selectedCateory.addEventListener('change', filterQuotes)
 
 // localStorage.clear()

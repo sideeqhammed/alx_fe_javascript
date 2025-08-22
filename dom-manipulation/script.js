@@ -138,7 +138,7 @@ function populateCategories() {
   uniqueCategories.forEach(category => {
     const option = document.createElement('option');
     option.value = category;
-    option.innerText = category;
+    option.textContent = category;
     selectedCateory.appendChild(option)
   })
 }

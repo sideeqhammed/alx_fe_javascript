@@ -1,4 +1,4 @@
-const quotes = [
+let quotes = [
   {
     text: "The only way to do great work is to love what you do.",
     category: "inspirational"
@@ -44,11 +44,20 @@ const quotes = [
     category: "change"
   }
 ];
+const saveQuotes = () => {
+  localStorage.setItem('quotesArr', JSON.stringify(quotes))
+}
+
+
+if (localStorage.getItem('quotesArr')) {
+  quotesJson = localStorage.getItem('quotesArr');
+  quotes = JSON.parse(quotesJson)
+}
 
 const displayQuote = document.getElementById('quoteDisplay');
 const button1 = document.getElementById('newQuote');
-const addNewQuote = document.getElementById('addNewQuote')
-const body = document.querySelector('body')
+const addNewQuote = document.getElementById('addNewQuote');
+const body = document.querySelector('body');
 
 
 const showRandomQuote = () => {
@@ -68,10 +77,12 @@ const addQuote = () => {
     console.log(quotes);
     alert("Your new quote has been added");
     newQuoteText.value = ''; newQuoteCategory.value = '';
+    saveQuotes();
   } else {
     alert('Incomplete information');
   }
 }
+
 
 const createAddQuoteForm = () => {
   const div = document.createElement('div');
@@ -90,17 +101,15 @@ const createAddQuoteForm = () => {
   body.appendChild(div)
 
 
-
   // <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
   //   <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
   //   <button onclick="addQuote()">Add Quote</button>
 }
-createAddQuoteForm();
 
-
+addNewQuote.addEventListener('click', (createAddQuoteForm))
 
 console.log(quotes);
 
 button1.addEventListener('click', showRandomQuote);
 
-
+// localStorage.clear()

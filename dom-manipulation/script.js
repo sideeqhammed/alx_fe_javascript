@@ -60,7 +60,7 @@ const addNewQuote = document.getElementById('addNewQuote');
 const body = document.querySelector('body');
 const exportQuotes = document.getElementById('exportQuotes');
 const importQuotes = document.getElementById('importFile')
-const selectedCateory = document.getElementById('categoryFilter')
+const selectedCategory = document.getElementById('categoryFilter')
 
 
 const showRandomQuote = () => {
@@ -139,19 +139,19 @@ function populateCategories() {
     const option = document.createElement('option');
     option.value = category;
     option.textContent = category;
-    selectedCateory.appendChild(option)
+    selectedCategory.appendChild(option)
   })
 }
 populateCategories();
 
-let filter = selectedCateory.value;
+let filter = selectedCategory.value;
 if (localStorage.getItem('filter')) {
-  selectedCateory.value = localStorage.getItem('filter')
+  selectedCategory.value = localStorage.getItem('filter')
   filterQuotes();
   console.log(filter, 'asdfg')
 }
 function filterQuotes() {
-  filter = selectedCateory.value;
+  filter = selectedCategory.value;
   let filteredQuotes = [];
   if (filter === "all") {
     filteredQuotes = quotes
@@ -187,6 +187,6 @@ importQuotes.addEventListener('change', (event) => {
   }
 })
 
-selectedCateory.addEventListener('change', filterQuotes)
+selectedCategory.addEventListener('change', filterQuotes)
 
 // localStorage.clear()

@@ -53,7 +53,7 @@ const newQuoteCategory = document.getElementById('newQuoteCategory');
 
 const showRandomQuote = () => {
   const rand = Math.floor(Math.random() * quotes.length);
-  displayQuote.innerText = quotes[rand].text;
+  displayQuote.innerHTML = quotes[rand].text;
 }
 
 const addQuote = () => {

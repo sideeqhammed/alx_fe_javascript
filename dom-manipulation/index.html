@@ -35,6 +35,13 @@
       text-align: center;
       border-bottom: dotted;
     }
+    label{
+      display: block;
+      text-align: center;
+    }
+    #importFile{
+      max-width:150px;
+    }
     #select {
       display: block;
       margin-top: 20px;
@@ -62,13 +69,16 @@
     <button id="newQuote">Show New Quote</button>
     <button id="addNewQuote">Add New Quote</button>
     <button id="exportQuotes">Export Quotes</button>
-    <label for="importFile">Import Quotes From Json File:</label>
-    <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
-    <label id="select" for="categoryFilter">Select Quote Category</label>
-    <select id="categoryFilter" onchange="filterQuotes()">
-      <option value="all">All Categories</option>
-      <!-- Dynamically populated categories -->
-    </select>
+    <label for="importFile">Import Quotes From Json File:
+      <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+    </label>
+    <label id="select" for="categoryFilter">Select Quote Category:
+      <select id="categoryFilter" onchange="filterQuotes()">
+        <option value="all">All Categories</option>
+        <!-- Dynamically populated categories -->
+      </select>
+    </label>
+    
     <button id="clearQuotes">Clear Quotes</button>
   </div>
 

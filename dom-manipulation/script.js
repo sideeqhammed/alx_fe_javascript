@@ -61,7 +61,7 @@ loadQuotes();
 const displayQuote = document.getElementById('quoteDisplay');
 const button1 = document.getElementById('newQuote');
 const addNewQuote = document.getElementById('addNewQuote');
-const body = document.querySelector('body');
+const body = document.getElementById('body');
 const exportQuotes = document.getElementById('exportQuotes');
 const importQuotes = document.getElementById('importFile')
 const selectedCategory = document.getElementById('categoryFilter')

@@ -7,10 +7,32 @@
 </head>
 <body>
   <style>
+    html {
+      text-align: center;
+    }
+    #body {
+      background-color: lightgray;
+      border-radius: 10px;
+      width: 30rem;
+      margin: auto;
+      padding: 10px 20px 20px 20px;
+      text-align:start;
+      box-shadow: 2px 2px 5px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 35px;
+    }
     button{
       display: block;
       margin: 20px;
       padding: 5px;
+    }
+    #quoteDisplay{
+      display: block;
+      min-height: 40px;
+      text-align: center;
+      border-bottom: dotted;
     }
     #select {
       display: block;
@@ -21,19 +43,21 @@
     }
   </style>
 
-  <h1>Dynamic Quote Generator</h1>
-  <div id="quoteDisplay"></div>
-  <button id="newQuote">Show New Quote</button>
-  <button id="addNewQuote">Add New Quote</button>
-  <button id="exportQuotes">Export Quotes</button>
-  <label for="importFile">Import Quotes From Json File:</label>
-  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
-  <label id="select" for="categoryFilter">Select Quote Category</label>
-  <select id="categoryFilter" onchange="filterQuotes()">
-    <option value="all">All Categories</option>
-    <!-- Dynamically populated categories -->
-  </select>
-  <button id="clearQuotes">Clear Quotes</button>
+  <div id="body">
+    <h1>Dynamic Quote Generator</h1>
+    <div id="quoteDisplay"></div>
+    <button id="newQuote">Show New Quote</button>
+    <button id="addNewQuote">Add New Quote</button>
+    <button id="exportQuotes">Export Quotes</button>
+    <label for="importFile">Import Quotes From Json File:</label>
+    <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+    <label id="select" for="categoryFilter">Select Quote Category</label>
+    <select id="categoryFilter" onchange="filterQuotes()">
+      <option value="all">All Categories</option>
+      <!-- Dynamically populated categories -->
+    </select>
+    <button id="clearQuotes">Clear Quotes</button>
+  </div>
 
   <script src="script.js"></script>
 </body>

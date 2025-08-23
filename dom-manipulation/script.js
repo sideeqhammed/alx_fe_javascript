@@ -95,6 +95,7 @@ const addQuote = () => {
 
 const createAddQuoteForm = () => {
   const div = document.createElement('div');
+  div.id="newQuoteDiv";
   const input1 = document.createElement('input');
   input1.id="newQuoteText"; input1.type="text"; input1.placeholder="Enter a new quote";
   const input2 = document.createElement('input');
@@ -106,8 +107,9 @@ const createAddQuoteForm = () => {
 
   div.appendChild(input1);
   div.appendChild(input2);
-  div.appendChild(button);
   body.appendChild(div)
+  body.appendChild(button);
+  
 }
 
 const exportToJsonFile = () => {

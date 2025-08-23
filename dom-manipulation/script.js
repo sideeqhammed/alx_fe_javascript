@@ -44,14 +44,18 @@ let quotes = [
   //   category: "change"
   // }
 ];
+
 const saveQuotes = () => {
   localStorage.setItem('quotesArr', JSON.stringify(quotes))
 }
 
-if (localStorage.getItem('quotesArr')) {
-  quotesJson = localStorage.getItem('quotesArr');
-  quotes = JSON.parse(quotesJson)
+const loadQuotes = () => {
+  if (localStorage.getItem('quotesArr')) {
+    quotesJson = localStorage.getItem('quotesArr');
+    quotes = JSON.parse(quotesJson)
+  }
 }
+loadQuotes();
 
 
 const displayQuote = document.getElementById('quoteDisplay');
@@ -69,6 +73,7 @@ const showRandomQuote = () => {
 }
 
 const addQuote = () => {
+  loadQuotes();
   const newQuoteText = document.getElementById('newQuoteText');
   const newQuoteCategory = document.getElementById('newQuoteCategory');
   if (newQuoteText.value && newQuoteCategory.value) {
@@ -106,6 +111,7 @@ const createAddQuoteForm = () => {
 }
 
 const exportToJsonFile = () => {
+  loadQuotes();
   const exportQuotesJson = JSON.stringify(quotes);
   const blob = new Blob([exportQuotesJson], {type: 'application/json'});
   const url = URL.createObjectURL(blob);
@@ -123,15 +129,19 @@ const importFromJsonFile = (event) => {
     const importedQuotes = JSON.parse(event.target.result);
     quotes.push(...importedQuotes);
     saveQuotes();
+    populateCategories();
     alert('Quotes imported successfully!');
   }
   fileReader.readAsText(event.target.files[0]);
-
-  populateCategories();
 }
 
 function populateCategories() {
-  allCategories = quotes.map(quote => quote.category)
+  loadQuotes();
+  for (let i = selectedCategory.children.length - 1; i >= 1; i--) {
+    selectedCategory.removeChild(selectedCategory.children[i]);
+  }
+
+  allCategories = quotes.map(quote => quote.category);
 
   const uniqueCategories = new Set(allCategories);
   console.log(uniqueCategories)
@@ -151,6 +161,7 @@ if (localStorage.getItem('filter')) {
   console.log(filter, 'asdfg')
 }
 function filterQuotes() {
+  loadQuotes()
   filter = selectedCategory.value;
   let filteredQuotes = [];
   if (filter === "all") {
@@ -189,4 +200,9 @@ importQuotes.addEventListener('change', (event) => {
 
 selectedCategory.addEventListener('change', filterQuotes)
 
-// localStorage.clear()
+
+const clearQuotes = document.getElementById('clearQuotes');
+clearQuotes.addEventListener('click', () => {
+  localStorage.clear()
+  window.location.reload();
+})

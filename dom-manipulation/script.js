@@ -183,8 +183,6 @@ function filterQuotes() {
 
 
 
-
-
 addNewQuote.addEventListener('click', createAddQuoteForm, {once: true})
 
 console.log(quotes);
@@ -249,6 +247,7 @@ const checkForUpdate  = () => {
 
   fetchPosts();
 }
+const updateIntervalId = setInterval(checkForUpdates, refreshInterval);
 
 
 let quotes = [/* your local quotes array */];

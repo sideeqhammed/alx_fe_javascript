@@ -249,3 +249,40 @@ const checkForUpdate  = () => {
 
   fetchPosts();
 }
+
+const syncQuotes = () => {
+  try {
+    updateQuotes = await fetchQuotesFromServer()
+  }
+}
+
+let quotes = [/* your local quotes array */];
+
+const saveQuotesToLocal = () => {
+  localStorage.setItem('quotes', JSON.stringify(quotes));
+};
+
+const resolveConflicts = (serverQuotes) => {
+  // Create a map of existing local quotes for faster lookup by ID or text
+  const localQuoteMap = new Map(quotes.map(quote => [quote.text, quote]));
+
+  // Iterate over the server's data to handle conflicts
+  serverQuotes.forEach(serverQuote => {
+    // Check if a quote with the same text exists locally
+    if (localQuoteMap.has(serverQuote.text)) {
+      // Server data takes precedence: Overwrite the local quote with the server's version
+      localQuoteMap.set(serverQuote.text, serverQuote);
+    } else {
+      // It's a new quote: Add it to the map
+      localQuoteMap.set(serverQuote.text, serverQuote);
+    }
+  });
+
+  // Convert the map back into an array and update the local quotes
+  quotes = Array.from(localQuoteMap.values());
+
+  // Save the updated array to local storage
+  saveQuotesToLocal();
+
+  console.log("Quotes updated from server. New count:", quotes.length);
+};

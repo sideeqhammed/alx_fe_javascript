@@ -208,3 +208,44 @@ clearQuotes.addEventListener('click', () => {
   localStorage.clear()
   window.location.reload();
 })
+
+
+const fetchPosts = async() => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    const posts = await response.json();
+    console.log("Fetched posts:", posts);
+    return posts;
+  } catch (err) {console.error(`Could not fetch posts: ${err}`)}
+}
+fetchPosts()
+
+const createPost = async(title,body) => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        title: title,
+        body: body
+      })
+    })
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    const post = await response.json()
+    console.log("New post created:", newPost);
+    return(post)
+  } catch (error) {console.error(`Could not create post: ${error}`)}
+}
+
+const refreshInterval = 300000;
+
+const checkForUpdate  = () => {
+  console.log ('Checking for updates ...')
+
+  fetchPosts();
+}

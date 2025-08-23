@@ -250,11 +250,6 @@ const checkForUpdate  = () => {
   fetchPosts();
 }
 
-const syncQuotes = () => {
-  try {
-    updateQuotes = await fetchQuotesFromServer()
-  }
-}
 
 let quotes = [/* your local quotes array */];
 
@@ -262,7 +257,7 @@ const saveQuotesToLocal = () => {
   localStorage.setItem('quotes', JSON.stringify(quotes));
 };
 
-const resolveConflicts = (serverQuotes) => {
+const syncQuotes = (serverQuotes) => {
   // Create a map of existing local quotes for faster lookup by ID or text
   const localQuoteMap = new Map(quotes.map(quote => [quote.text, quote]));
 

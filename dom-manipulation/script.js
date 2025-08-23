@@ -278,5 +278,5 @@ const syncQuotes = (serverQuotes) => {
   // Save the updated array to local storage
   saveQuotesToLocal();
 
-  console.log("Quotes updated from server. New count:", quotes.length);
+  console.log("Quotes synced with server. New count:", quotes.length);
 };
